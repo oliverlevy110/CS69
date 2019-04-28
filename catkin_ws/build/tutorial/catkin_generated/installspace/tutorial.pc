@@ -1,0 +1,8 @@
+prefix=/home/oliverlevyorl/CS69/catkin_ws/install
+
+Name: tutorial
+Description: Description of tutorial
+Version: 0.0.1
+Cflags: 
+Libs: -L/home/oliverlevyorl/CS69/catkin_ws/install/lib 
+Requires: 

@@ -1,0 +1,30 @@
+<!-- Simulation example. -->
+<launch>
+  <arg name="world_file" default="$(find a1_2)/world/maze_a1_2.world" />
+
+  <param name="/use_sim_time" value="true"/>
+
+  <node pkg="stage_ros" type="stageros" name="stageros" args="$(arg world_file)" />
+
+  <include file="$(find a1_2)/launch/robot.launch">
+    <arg name="robot_name" value="robot_0" />
+  </include>
+
+  <include file="$(find a1_2)/launch/robot.launch">
+    <arg name="robot_name" value="robot_1" />
+  </include>
+
+  <include file="$(find a1_2)/launch/robot.launch">
+    <arg name="robot_name" value="robot_2" />
+  </include>
+  
+  <include file="$(find a1_2)/launch/robot.launch">
+    <arg name="robot_name" value="robot_3" />
+  </include>
+
+  <include file="$(find a1_2)/launch/robot.launch">
+    <arg name="robot_name" value="robot_4" />
+  </include>
+
+</launch>
+

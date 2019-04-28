@@ -1,0 +1,6 @@
+set(a1_SETUP_PY_VERSION "0.0.0")
+set(a1_SETUP_PY_SCRIPTS "scripts")
+set(a1_SETUP_PY_PACKAGES "a1")
+set(a1_SETUP_PY_PACKAGE_DIRS "src/a1")
+set(a1_SETUP_PY_MODULES "")
+set(a1_SETUP_PY_MODULE_DIRS "")

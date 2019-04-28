@@ -1,0 +1,8 @@
+prefix=/home/oliverlevyorl/CS69/catkin_ws/install
+
+Name: levy_cs69_a2
+Description: Description of levy_cs69_a2
+Version: 0.0.0
+Cflags: -I/home/oliverlevyorl/CS69/catkin_ws/install/include
+Libs: -L/home/oliverlevyorl/CS69/catkin_ws/install/lib 
+Requires: message_runtime roscpp rospy std_msgs

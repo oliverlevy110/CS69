@@ -1,0 +1,6 @@
+set(tutorial_SETUP_PY_VERSION "0.0.1")
+set(tutorial_SETUP_PY_SCRIPTS "scripts")
+set(tutorial_SETUP_PY_PACKAGES "tutorial")
+set(tutorial_SETUP_PY_PACKAGE_DIRS "src/tutorial")
+set(tutorial_SETUP_PY_MODULES "")
+set(tutorial_SETUP_PY_MODULE_DIRS "")

@@ -1,0 +1,8 @@
+prefix=/home/oliverlevyorl/CS69/catkin_ws/devel
+
+Name: a1
+Description: Description of a1
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/oliverlevyorl/CS69/catkin_ws/devel/lib 
+Requires: 

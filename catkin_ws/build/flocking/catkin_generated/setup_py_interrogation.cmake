@@ -1,0 +1,6 @@
+set(flocking_SETUP_PY_VERSION "0.0.1")
+set(flocking_SETUP_PY_SCRIPTS "scripts")
+set(flocking_SETUP_PY_PACKAGES "flocking")
+set(flocking_SETUP_PY_PACKAGE_DIRS "src/flocking")
+set(flocking_SETUP_PY_MODULES "")
+set(flocking_SETUP_PY_MODULE_DIRS "")

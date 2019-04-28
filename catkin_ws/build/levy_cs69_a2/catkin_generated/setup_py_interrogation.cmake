@@ -1,0 +1,6 @@
+set(levy_cs69_a2_SETUP_PY_VERSION "0.0.0")
+set(levy_cs69_a2_SETUP_PY_SCRIPTS "scripts")
+set(levy_cs69_a2_SETUP_PY_PACKAGES "levy_cs69_a2")
+set(levy_cs69_a2_SETUP_PY_PACKAGE_DIRS "src/levy_cs69_a2")
+set(levy_cs69_a2_SETUP_PY_MODULES "")
+set(levy_cs69_a2_SETUP_PY_MODULE_DIRS "")

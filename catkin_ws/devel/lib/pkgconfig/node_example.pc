@@ -1,0 +1,8 @@
+prefix=/home/oliverlevyorl/CS69/catkin_ws/devel
+
+Name: node_example
+Description: Description of node_example
+Version: 0.0.1
+Cflags: -I/home/oliverlevyorl/CS69/catkin_ws/devel/include
+Libs: -L/home/oliverlevyorl/CS69/catkin_ws/devel/lib 
+Requires: dynamic_reconfigure message_runtime roscpp rosgraph_msgs rospy std_msgs
