@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.cmake.em
 
-message(STATUS "levy_cs69_a2: 1 messages, 0 services")
+message(STATUS "levy_cs69_a2: 1 messages, 1 services")
 
 set(MSG_I_FLAGS "-Ilevy_cs69_a2:/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/msg;-Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg")
 
@@ -16,6 +16,11 @@ add_custom_target(levy_cs69_a2_generate_messages ALL)
 # verify that message/service dependencies have not changed since configure
 
 
+
+get_filename_component(_filename "/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/srv/FindSignalStrength.srv" NAME_WE)
+add_custom_target(_levy_cs69_a2_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "levy_cs69_a2" "/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/srv/FindSignalStrength.srv" ""
+)
 
 get_filename_component(_filename "/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/msg/Signal.msg" NAME_WE)
 add_custom_target(_levy_cs69_a2_generate_messages_check_deps_${_filename}
@@ -36,6 +41,12 @@ _generate_msg_cpp(levy_cs69_a2
 )
 
 ### Generating Services
+_generate_srv_cpp(levy_cs69_a2
+  "/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/srv/FindSignalStrength.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/levy_cs69_a2
+)
 
 ### Generating Module File
 _generate_module_cpp(levy_cs69_a2
@@ -49,6 +60,8 @@ add_custom_target(levy_cs69_a2_generate_messages_cpp
 add_dependencies(levy_cs69_a2_generate_messages levy_cs69_a2_generate_messages_cpp)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/srv/FindSignalStrength.srv" NAME_WE)
+add_dependencies(levy_cs69_a2_generate_messages_cpp _levy_cs69_a2_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/msg/Signal.msg" NAME_WE)
 add_dependencies(levy_cs69_a2_generate_messages_cpp _levy_cs69_a2_generate_messages_check_deps_${_filename})
 
@@ -69,6 +82,12 @@ _generate_msg_eus(levy_cs69_a2
 )
 
 ### Generating Services
+_generate_srv_eus(levy_cs69_a2
+  "/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/srv/FindSignalStrength.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/levy_cs69_a2
+)
 
 ### Generating Module File
 _generate_module_eus(levy_cs69_a2
@@ -82,6 +101,8 @@ add_custom_target(levy_cs69_a2_generate_messages_eus
 add_dependencies(levy_cs69_a2_generate_messages levy_cs69_a2_generate_messages_eus)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/srv/FindSignalStrength.srv" NAME_WE)
+add_dependencies(levy_cs69_a2_generate_messages_eus _levy_cs69_a2_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/msg/Signal.msg" NAME_WE)
 add_dependencies(levy_cs69_a2_generate_messages_eus _levy_cs69_a2_generate_messages_check_deps_${_filename})
 
@@ -102,6 +123,12 @@ _generate_msg_lisp(levy_cs69_a2
 )
 
 ### Generating Services
+_generate_srv_lisp(levy_cs69_a2
+  "/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/srv/FindSignalStrength.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/levy_cs69_a2
+)
 
 ### Generating Module File
 _generate_module_lisp(levy_cs69_a2
@@ -115,6 +142,8 @@ add_custom_target(levy_cs69_a2_generate_messages_lisp
 add_dependencies(levy_cs69_a2_generate_messages levy_cs69_a2_generate_messages_lisp)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/srv/FindSignalStrength.srv" NAME_WE)
+add_dependencies(levy_cs69_a2_generate_messages_lisp _levy_cs69_a2_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/msg/Signal.msg" NAME_WE)
 add_dependencies(levy_cs69_a2_generate_messages_lisp _levy_cs69_a2_generate_messages_check_deps_${_filename})
 
@@ -135,6 +164,12 @@ _generate_msg_nodejs(levy_cs69_a2
 )
 
 ### Generating Services
+_generate_srv_nodejs(levy_cs69_a2
+  "/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/srv/FindSignalStrength.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/levy_cs69_a2
+)
 
 ### Generating Module File
 _generate_module_nodejs(levy_cs69_a2
@@ -148,6 +183,8 @@ add_custom_target(levy_cs69_a2_generate_messages_nodejs
 add_dependencies(levy_cs69_a2_generate_messages levy_cs69_a2_generate_messages_nodejs)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/srv/FindSignalStrength.srv" NAME_WE)
+add_dependencies(levy_cs69_a2_generate_messages_nodejs _levy_cs69_a2_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/msg/Signal.msg" NAME_WE)
 add_dependencies(levy_cs69_a2_generate_messages_nodejs _levy_cs69_a2_generate_messages_check_deps_${_filename})
 
@@ -168,6 +205,12 @@ _generate_msg_py(levy_cs69_a2
 )
 
 ### Generating Services
+_generate_srv_py(levy_cs69_a2
+  "/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/srv/FindSignalStrength.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/levy_cs69_a2
+)
 
 ### Generating Module File
 _generate_module_py(levy_cs69_a2
@@ -181,6 +224,8 @@ add_custom_target(levy_cs69_a2_generate_messages_py
 add_dependencies(levy_cs69_a2_generate_messages levy_cs69_a2_generate_messages_py)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/srv/FindSignalStrength.srv" NAME_WE)
+add_dependencies(levy_cs69_a2_generate_messages_py _levy_cs69_a2_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/msg/Signal.msg" NAME_WE)
 add_dependencies(levy_cs69_a2_generate_messages_py _levy_cs69_a2_generate_messages_check_deps_${_filename})
 

@@ -41,6 +41,10 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/levy_cs69_a2/srv" TYPE FILE FILES "/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/srv/FindSignalStrength.srv")
+endif()
+
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/levy_cs69_a2/cmake" TYPE FILE FILES "/home/oliverlevyorl/CS69/catkin_ws/build/levy_cs69_a2/catkin_generated/installspace/levy_cs69_a2-msg-paths.cmake")
 endif()
 

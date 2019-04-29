@@ -1,5 +1,5 @@
-int x
-int y
-float theta
+int32 x
+int32 y
+float32 theta
 ---
-float avg_str
+float32 avg_str

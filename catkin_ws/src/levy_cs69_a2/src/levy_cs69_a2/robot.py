@@ -16,14 +16,22 @@ class Robot:
         #publishers 
         self.pub = rospy.Publisher("/cmd_vel", Twist, queue_size=5)        
 
-        #booleans for if moving
-        self.stopped = False
-
         #data used for triangulating
         self.strengths={}
 
         #robot's current position
         self.position;
+    
+        #Goal to get to
+        self.goal;
+    
+        #control booleans
+        self.triangulate_control = False
+        self.safety_control = False
+
+        #triangulate distance and angles
+        self.triangulate_dist = 2
+        self.triangulate_angle = 60
 
     def find_position(self, odom):
         pose = odometry_msg.pose.pose
@@ -41,14 +49,12 @@ class Robot:
 
         self.position = [x,y,yaw]
             
-
-    #should this be an array? Or several (velocities and times)?
-    def command_velocity(self, linear, angular, time):
         
-    def start_trigangulate(self):
-        
+    def start_triangulate(self):
+        pass 
 
     def find_goal(self):
+        pass
 
     def safety(self):
         print("You are in God's hands now my son.")

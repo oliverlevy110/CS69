@@ -54,6 +54,7 @@ CMAKE_BINARY_DIR = /home/oliverlevyorl/CS69/catkin_ws/build
 include levy_cs69_a2/CMakeFiles/levy_cs69_a2_generate_messages_nodejs.dir/progress.make
 
 levy_cs69_a2/CMakeFiles/levy_cs69_a2_generate_messages_nodejs: /home/oliverlevyorl/CS69/catkin_ws/devel/share/gennodejs/ros/levy_cs69_a2/msg/Signal.js
+levy_cs69_a2/CMakeFiles/levy_cs69_a2_generate_messages_nodejs: /home/oliverlevyorl/CS69/catkin_ws/devel/share/gennodejs/ros/levy_cs69_a2/srv/FindSignalStrength.js
 
 
 /home/oliverlevyorl/CS69/catkin_ws/devel/share/gennodejs/ros/levy_cs69_a2/msg/Signal.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
@@ -61,8 +62,14 @@ levy_cs69_a2/CMakeFiles/levy_cs69_a2_generate_messages_nodejs: /home/oliverlevyo
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/oliverlevyorl/CS69/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Javascript code from levy_cs69_a2/Signal.msg"
 	cd /home/oliverlevyorl/CS69/catkin_ws/build/levy_cs69_a2 && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/msg/Signal.msg -Ilevy_cs69_a2:/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p levy_cs69_a2 -o /home/oliverlevyorl/CS69/catkin_ws/devel/share/gennodejs/ros/levy_cs69_a2/msg
 
+/home/oliverlevyorl/CS69/catkin_ws/devel/share/gennodejs/ros/levy_cs69_a2/srv/FindSignalStrength.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
+/home/oliverlevyorl/CS69/catkin_ws/devel/share/gennodejs/ros/levy_cs69_a2/srv/FindSignalStrength.js: /home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/srv/FindSignalStrength.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/oliverlevyorl/CS69/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Javascript code from levy_cs69_a2/FindSignalStrength.srv"
+	cd /home/oliverlevyorl/CS69/catkin_ws/build/levy_cs69_a2 && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/srv/FindSignalStrength.srv -Ilevy_cs69_a2:/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p levy_cs69_a2 -o /home/oliverlevyorl/CS69/catkin_ws/devel/share/gennodejs/ros/levy_cs69_a2/srv
+
 levy_cs69_a2_generate_messages_nodejs: levy_cs69_a2/CMakeFiles/levy_cs69_a2_generate_messages_nodejs
 levy_cs69_a2_generate_messages_nodejs: /home/oliverlevyorl/CS69/catkin_ws/devel/share/gennodejs/ros/levy_cs69_a2/msg/Signal.js
+levy_cs69_a2_generate_messages_nodejs: /home/oliverlevyorl/CS69/catkin_ws/devel/share/gennodejs/ros/levy_cs69_a2/srv/FindSignalStrength.js
 levy_cs69_a2_generate_messages_nodejs: levy_cs69_a2/CMakeFiles/levy_cs69_a2_generate_messages_nodejs.dir/build.make
 
 .PHONY : levy_cs69_a2_generate_messages_nodejs

@@ -1,7 +1,7 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
 messages_str = "/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/msg/Signal.msg"
-services_str = ""
+services_str = "/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/srv/FindSignalStrength.srv"
 pkg_name = "levy_cs69_a2"
 dependencies_str = "std_msgs"
 langs = "gencpp;geneus;genlisp;gennodejs;genpy"
