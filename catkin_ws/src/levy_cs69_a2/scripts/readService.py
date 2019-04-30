@@ -11,9 +11,9 @@ class Read:
         #current strength value
         self.current_strength; 
         #Subscribers
-        sub_strength = rospy.Subscriber("/turtle/signal_strength", Signal, read_strength)
+        sub_strength = rospy.Subscriber("/turtle/signal_strength", Signal, self.read_strength)
         #Publishers
-        sub_service = rospy.Service("findSignalStrength", FindSignalStrength, processCall)
+        sub_service = rospy.Service("findSignalStrength", FindSignalStrength, self.processCall)
 
 
     """
@@ -26,8 +26,8 @@ class Read:
     Take the average wifi strength over 15 seconds
     """
     def processCall(self, rqst):
-        #stop loop after 15 seconds
-        time_end = time.time() + 15
+        #stop loop after 5 seconds
+        time_end = time.time() + 5
         #for averaging signal strength
         num_messages=0
         total_str=0.0

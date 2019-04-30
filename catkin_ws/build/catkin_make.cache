@@ -1,2 +1,2 @@
-a1:dynamicPubSubExample:flocking:levy_cs69_a2
+dynamicPubSubExample:flocking:levy_cs69_a2
 -DCATKIN_DEVEL_PREFIX=/home/oliverlevyorl/CS69/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/oliverlevyorl/CS69/catkin_ws/install -G Unix Makefiles
