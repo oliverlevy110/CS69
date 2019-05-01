@@ -1,10 +1,14 @@
 <!-- Robot nodes. -->
 <launch>
+
+  <arg name="strength" /> 
+
   <group ns="turtle">
-   <!-- <node pkg="levy_cs69_a2" type="follow_wifi.py" name="follow_wifi" output="screen" />-->
+    <param name="strength" value="$(arg strength)"/>
+    <!-- <node pkg="levy_cs69_a2" type="follow_wifi.py" name="follow_wifi" output="screen" />-->
     <node pkg="levy_cs69_a2" type="readService.py" name="readService" output="screen" />
     <node pkg="levy_cs69_a2" type="create_wifi.py" name="create_wifi" output="screen" />
-    <node pkg="levy_cs69_a2" type="start_node.py" name="start_node" output="screen" />
+    <node pkg="levy_cs69_a2" type="start_node.py" name="start_node" output="screen"/>
     
   </group>
 </launch>

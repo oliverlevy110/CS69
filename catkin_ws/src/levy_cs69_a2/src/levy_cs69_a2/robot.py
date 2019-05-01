@@ -29,7 +29,7 @@ class Robot:
         self.strengths={}
 
         #error margin
-        self.error = 0.2
+        self.error = 0.05
         
         
         #robot's current position
@@ -88,17 +88,15 @@ class Robot:
             else:
                 rospy.loginfo("Unable to read goal point.\n")
             
-            theta = atan2(self.goal[1]- self.position[1], self.goal[0] -self.position[0])
+            rospy.loginfo("Goal Point: %f,%f\n", self.goal[0], self.goal[1])
+            theta = math.atan2(self.goal[1]- self.position[1], self.goal[0] -self.position[0])
             sum_theta_x = math.cos(self.position[2]) + math.cos(theta)
             sum_theta_y = math.sin(self.position[2]) + math.sin(theta)
             new_theta = math.atan2(sum_theta_y, sum_theta_x) 
             
-            if new_theta>2.84:
-                time_ang = new_theta /2.84
-            else:   
-                time_ang = 1.0
-            self.cmd_msg.angular.z = new_theta
-            time.sleep(time_ang)
+            time_ang = new_theta
+            self.cmd_msg.angular.z = 1.0
+            time.sleep(abs(float(time_ang)))
             self.cmd_msg.angular.z = 0
 
 
@@ -114,8 +112,8 @@ class Robot:
     def start_triangulate(self):
         if self.safety_control == False:
                 
-            self.cmd_msg.angular.z = self.triangulate_angle 
-            time.sleep(1)
+            self.cmd_msg.angular.z = 1.0 
+            time.sleep(abs(self.triangulate_angle))
             self.cmd_msg.angular.z = 0
  
             self.cmd_msg.linear.x = 0.22
@@ -124,11 +122,12 @@ class Robot:
             self.cmd_msg.linear.x = 0
 
             try:
-                strength.avg_str = self.triangulate(0,0,0)
-                rospy.loginfo(" \n****************** called service******************* \n strength is %f \n *********************", strength)
+                strengthResponce = self.triangulate(0,0,0)
+                strength = strengthResponce.avg_str
             except:
                 rospy.loginfo("Error communicating with the server \n")
                 strength = 0
+            rospy.loginfo("Strength: %f \n Position: %f,%f", strength, self.position[0], self.position[1])
             self.strengths[strength] = [self.position[0], self.position[1]]
             
 
@@ -140,7 +139,7 @@ class Robot:
 
             if(((time.time()-time_end)%10) < 0.4):
                 self.triangulate_control = True
-
+                rospy.loginfo("\n TRIANGULATING \n")
                 self.start_triangulate()
                 self.start_triangulate()
                 self.start_triangulate()

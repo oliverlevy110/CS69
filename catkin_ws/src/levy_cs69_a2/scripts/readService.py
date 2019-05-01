@@ -36,7 +36,6 @@ class Read:
            num_messages += 1
            total_str += self.current_strength 
            
-        rospy.loginfo("*************** IN READSERVICE **************\n signal average= %f \n", total_str/num_messages)
         value = total_str/num_messages
         return value
 

@@ -19,7 +19,7 @@ class CreateWifi:
             message = Signal()
             message.timestamp = rospy.get_rostime()
             message.frame_id = "2"
-       #     rospy.loginfo("IN CREATE_WIFI, signal strength = %f \n", self.strength)
+#            rospy.loginfo("*****IN CREATE_WIFI*****\n signal strength = %f \n\n", self.strength)
             message.signal_strength = self.strength 
             self.pub.publish(message)
             r.sleep()
@@ -31,12 +31,12 @@ class CreateWifi:
         y=pose.position.y
         
         dist = math.sqrt((x-self.pos[0])**2+(y-self.pos[1])**2)
-        
-        rate = dist/2
-        if dist<=2:
-            self.strength=0
-        else:
-            self.strength = (rate**2)/100
+
+        # Free Space Path Loss
+        deb0 = 20*math.log10(0.001 * 0.1) + 20*math.log10(1000 * 2.4) + 32.44 
+        # Free Space Path Loss assuming dist in meters and frequency in MHz 
+        deb = 20*math.log10(0.001 * dist) + 20*math.log10(1000 * 2.4) + 32.44 
+        self.strength = -deb/deb0 * 10
 
 
 if __name__ == "__main__":
