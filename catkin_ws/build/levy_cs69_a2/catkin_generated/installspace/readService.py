@@ -9,36 +9,42 @@ class Read:
 
     def __init__(self):   
         #current strength value
-        self.current_strength; 
+        self.current_strength=0; 
         #Subscribers
-        sub_strength = rospy.Subscriber("/turtle/signal_strength", Signal, self.read_strength)
+        self.sub_strength = rospy.Subscriber("/turtle/signal_strength", Signal, self.read_strength)
         #Publishers
-        sub_service = rospy.Service("findSignalStrength", FindSignalStrength, self.processCall)
+        self.sub_service = rospy.Service("findSignalStrength", FindSignalStrength, self.processCall)
 
 
     """
     Continually read the current strength from the subscriber. 
     """
     def read_strength(self, message):
-        self.cur_strength = signal_msg.signal_strength
+        self.current_strength = message.signal_strength
+        rospy.loginfo("IN READSERVICE, strength = %f \n", self.current_strength)
 
     """
     Take the average wifi strength over 15 seconds
     """
     def processCall(self, rqst):
-        #stop loop after 15 seconds
-        time_end = time.time() + 15
+        #stop loop after 5 seconds
+        time_end = time.time() + 5
         #for averaging signal strength
         num_messages=0
         total_str=0.0
 
         while time.time()<time_end:
-           num_messages++
-           total_str += self.cur_strength 
-        
+           num_messages += 1
+           total_str += self.current_strength 
+           
+     #      rospy.loginfo("IN READSERVICE, running strength average = %f \n", total_str)
         return total_str/num_messages
+
+    def spin(self):
+        rospy.spin()
 
 if __name__ == "__main__":
     rospy.init_node("readStrength")
     read=Read()
+    read.spin()
     rospy.spin()

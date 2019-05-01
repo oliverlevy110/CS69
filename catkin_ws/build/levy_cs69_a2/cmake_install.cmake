@@ -107,3 +107,7 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/levy_cs69_a2" TYPE PROGRAM FILES "/home/oliverlevyorl/CS69/catkin_ws/build/levy_cs69_a2/catkin_generated/installspace/create_wifi.py")
 endif()
 
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/levy_cs69_a2" TYPE PROGRAM FILES "/home/oliverlevyorl/CS69/catkin_ws/build/levy_cs69_a2/catkin_generated/installspace/start_node.py")
+endif()
+

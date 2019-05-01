@@ -40,6 +40,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/scripts/create_wifi.py"
   "/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/scripts/follow_wifi.py"
   "/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/scripts/readService.py"
+  "/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/scripts/start_node.py"
   "/home/oliverlevyorl/CS69/catkin_ws/src/levy_cs69_a2/setup.py"
   "/opt/ros/kinetic/share/catkin/cmake/../package.xml"
   "/opt/ros/kinetic/share/catkin/cmake/all.cmake"

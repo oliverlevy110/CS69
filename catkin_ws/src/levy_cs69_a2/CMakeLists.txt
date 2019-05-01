@@ -173,6 +173,10 @@ include_directories(
    scripts/create_wifi.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
+ catkin_install_python(PROGRAMS
+   scripts/start_node.py
+   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+ )
 ## Mark executables and/or libraries for installation
 # install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}

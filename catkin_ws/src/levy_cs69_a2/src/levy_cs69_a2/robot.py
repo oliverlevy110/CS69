@@ -1,26 +1,30 @@
 #!/usr/bin/python
 
+import tf
 import math
 import rospy
+import time
+
+from threading import Thread
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
 from sensor_msgs.msg import LaserScan
+from levy_cs69_a2.srv import FindSignalStrength
 from levy_cs69_a2.triangulateCalculation import TriangulateCalculation
 
 class Robot:
     # implement passing this parameter
     def __init__(self, strength = 40):
         #subscribers
-        self.sub_strength = rospy.Subscriber("odom",Odom,self.find_position)
+        self.sub_strength = rospy.Subscriber("/odom",Odometry,self.find_position)
         #add subscriber to wifi strength, to slow robot if within strength range
         #add subscriber for laser scan
         #publishers and publishing rate
         self.pub = rospy.Publisher("/cmd_vel", Twist, queue_size=5)        
-        self.pub_rate = 5;
+        self.pub_rate = 5
 
         #Service Proxies
         self.triangulate = rospy.ServiceProxy("findSignalStrength", FindSignalStrength)
-
         #data used for triangulating
         self.strengths={}
 
@@ -30,14 +34,15 @@ class Robot:
         
         #robot's current position
         #x,y,yaw
-        self.position;
-    
+        self.position=[]
+        self.has_position = False    
+
         #Robot's current velocity
-        self.cmd_msg = Twist();
+        self.cmd_msg = Twist()
         
         #Goal to get to
         #x,y
-        self.goal;
+        self.goal=[2]
     
         #control booleans
         self.triangulate_control = False
@@ -45,13 +50,12 @@ class Robot:
 
 
         #triangulate distance and angles
-        self.triangulate_dist = 1
+        self.triangulate_dist = 2
         self.triangulate_angle = 60
-        self.triangulate_point;
 
 ##################### Current Position and Reading if arrived at Goals #######################
 
-    def find_position(self, odom):
+    def find_position(self, odometry_msg):
         pose = odometry_msg.pose.pose
 
         x=pose.position.x
@@ -66,25 +70,8 @@ class Robot:
         yaw = euler[2]
 
         self.position = [x,y,yaw]
+        self.has_position = True
 
-    #goal is in the form x,y
-    def read_goal(self,goal):
-        if (   
-                self.goal[0] - self.position[0] < self.error and
-                self.goal[1] - self.position[1] < self.error
-           ):   return True
-        else: 
-            return False 
-
-################### Finding Goals #########################
-    #done
-    def find_tri_goal(self): 
-        sum_theta_x = math.cos(self.position[2]) + math.cos(self.triangulate_angle)
-        sum_theta_y = math.sin(self.position[2]) + math.sin(self.triangulate_angle)
-        new_theta = math.atan2(sum_theta_y, sum_theta_x) 
-        new_x = self.position[0] + math.cos(new_theta)
-        new_y = self.position[1] + math.cos(new_theta)
-        return [new_x,new_y,new_theta]
 
 ################## Steering Behaviors #########################
 
@@ -94,11 +81,11 @@ class Robot:
             find = TriangulateCalculation()
             intermediary = find.triangulate(self.strengths, self.error)
             if(intermediary[0] != 0): 
-                goal = intermediary;
+                goal = intermediary
             else:
-                print("Unable to read goal point.\n")
+                rospy.loginfo("Unable to read goal point.\n")
             
-            while self.read_goal(self.goal) != True:
+            while self.read_goal(self.goal) != True and not rospy.is_shutdown():
                 self.cmd_msg.linear.x = 0.22
                 dist = math.sqrt((self.triangulate_point[0]- self.position[0])**2 + (self.triangulate_point[1]- self.position[1])**2 )
                 ang_divide = dist/0.22
@@ -112,48 +99,63 @@ class Robot:
 
     #triangulation steering    
     def start_triangulate(self):
-        self.triangulate_point = self.find_tri_goal() 
-        if self.safety == False:
-            while self.read_goal(self.triangulate_point) != True:
-                dist = math.sqrt((self.triangulate_point[0]- self.position[0])**2 + (self.triangulate_point[1]- self.position[1])**2 )
-                self.cmd_msg.linear.x = 0.22
-                ang_divide = dist/0.22
-                self.cmd_msg.angular.z = self.triangulate_angle / ang_divide
-            self.cmd_msg.linear.x= 0
-            self.cmd_msg.angular.z =0 
-            rospy.wait_for_service('findSignalStrength')
+        if self.safety_control == False:
+                
+            self.cmd_msg.angular.z = 1.0472 
+            time.sleep(1)
+            self.cmd_msg.angular.z = 0
+ 
+            self.cmd_msg.linear.x = 0.22
+            time_travel = self.triangulate_dist/0.22
+            time.sleep(time_travel)
+            self.cmd_msg.linear.x = 0
+
             try:
                 strength = self.triangulate(0,0,0)
+                rospy.loginfo(" \n****************** called service******************* \n strength is %f \n *********************", strength)
             except:
-                print("Error communicating with the server \n")
-            
+                rospy.loginfo("Error communicating with the server \n")
+                strength = 0
+            self.strengths[strength] = [self.position[0], self.position[1]]
             
 
 
     def safety(self):
-        print("You are in God's hands now my son.\n")
+        rospy.loginfo("You are in God's hands now my son.\n")
 
 ######################### Controllers and Spin ##############################3
 
     def triangulationController(self):
-        self.triangulate_control = True;
+        goalbool = False 
+        time_end = time.time() + 20
+        while True and not rospy.is_shutdown():
 
-        self.start_triangulate()
-        self.start_triangulate()
-        self.start_triangulate()
+            if(((time.time()-time_end)%10) < 0.4):
+                self.triangulate_control = True
 
-        self.triangulate_control = False;
+                self.start_triangulate()
+                self.start_triangulate()
+                self.start_triangulate()
 
+                self.triangulate_control = False
+                goalbool = True
+            elif goalbool:
+                self.find_goal()
+            else: 
+                pass
+
+            time.sleep(1)
+            
     def spin(self):
         r = rospy.Rate(self.pub_rate)
-        i = 0
+        startbool = True
+        rospy.wait_for_service('findSignalStrength')
         while not rospy.is_shutdown():
-            
+            if(self.has_position and startbool): 
+                thread = Thread(target = self.triangulationController)
+                thread.start()
+                startbool=False
             self.pub.publish(self.cmd_msg)
-            if i % 15*pub_rate:
-                self.triangulationController()
-            else:
-                self.find_goal()
             r.sleep()
 
 

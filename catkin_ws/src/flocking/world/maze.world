@@ -43,58 +43,58 @@ turtlebot
   color "black"
 )
 
+#turtlebot
+#(
+#  pose [ 3.0 5.0 0.0 0.0 ]
+#  name "robot_1"
+#  color "black"
+#)
+#
+#turtlebot
+#(
+#  pose [ 8.0 2.0 0.0 0.0 ]
+#  name "robot_2"
+##  color "black"
+#)
+#turtlebot
+#(
+#  pose [ 1.0 3.0 0.0 0.0 ]
+#  name "robot_3"
+#  color "black"
+#)
+#turtlebot
+#(
+#  pose [ 4.0 4.0 0.0 0.0 ]
+#  name "robot_4"
+#  color "black"
+#)
+#turtlebot
+#(
+#  pose [ 4.0 6.0 0.0 0.0 ]
+#  name "robot_5"
+#  color "black"
+#)
+#turtlebot
+#(
+#  pose [ 6.0 6.0 0.0 0.0 ]
+#  name "robot_6"
+#  color "black"
+#)
+#turtlebot
+#(
+#  pose [ 8.0 8.0 0.0 0.0 ]
+#  name "robot_7"
+#  color "black"
+#)
+#turtlebot
+#(
+#  pose [ 1.0 1.0 0.0 0.0 ]
+#  name "robot_8"
+#  color "black"
+#)
 turtlebot
-(
-  pose [ 3.0 5.0 0.0 0.0 ]
-  name "robot_1"
-  color "black"
-)
-
-turtlebot
-(
-  pose [ 8.0 2.0 0.0 0.0 ]
-  name "robot_2"
-  color "black"
-)
-turtlebot
-(
-  pose [ 1.0 3.0 0.0 0.0 ]
-  name "robot_3"
-  color "black"
-)
-turtlebot
-(
-  pose [ 4.0 4.0 0.0 0.0 ]
-  name "robot_4"
-  color "black"
-)
-turtlebot
-(
-  pose [ 4.0 6.0 0.0 0.0 ]
-  name "robot_5"
-  color "black"
-)
-turtlebot
-(
-  pose [ 6.0 6.0 0.0 0.0 ]
-  name "robot_6"
-  color "black"
-)
-turtlebot
-(
-  pose [ 8.0 8.0 0.0 0.0 ]
-  name "robot_7"
-  color "black"
-)
-turtlebot
-(
-  pose [ 1.0 1.0 0.0 0.0 ]
-  name "robot_8"
-  color "black"
-)
-turtlebot
-(
-  pose [ 1.0 7.0 0.0 0.0 ]
-  name "robot_9"
-  color "black"
-)
+#(
+#  pose [ 1.0 7.0 0.0 0.0 ]
+#  name "robot_9"
+#  color "black"
+#)

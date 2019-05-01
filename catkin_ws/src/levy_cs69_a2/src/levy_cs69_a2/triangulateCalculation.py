@@ -1,5 +1,5 @@
 import math
-
+import rospy
 class TriangulateCalculation:
     def __init__(self):
         pass    
@@ -9,16 +9,19 @@ class TriangulateCalculation:
 
     """
     def triangulate(self, points, error):
-        strength
-        x
-        y
-
+        rospy.loginfo("************** IN TRIANGULATE CALCULATION ****************")
+        strength=[0,0,0]
+        x=[0,0,0]
+        y=[0,0,0]
         i = 0
-        for item in points.items():
-            strength[i] = item[0]
-            x[i] = item[1][0]
-            y[i] = item[1][1]
+        for key, value in points.items():
+            rospy.loginfo("key: %s \n value: %s,%s \n", key, value[0], value[1])
+            strength[i] = key
 
+            x[i] = value[0]
+            y[i] = value[1]
+
+        rospy.loginfo("Strength: %s \n x: %s, \n y: %s \n", strength, x,y)
         Pl_0 = strength[0]
         Pl_1 = strength[1]
         Pl_2 = strength[2]
@@ -37,7 +40,7 @@ class TriangulateCalculation:
         radius_2 = d_2/math.sqrt(math.abs(Plo1_2/Pl_2))
 
         #distance of intersection from point 0
-        a = (radius_0**2 - radius_1**2 + d**2 )/(2d) 
+        a = (radius_0**2 - radius_1**2 + d**2 )/(2*d) 
 
         x_intersect = x[0] + d_x*(a/d)
         y_intersect = y[0] + d_y*(a/d)
@@ -60,10 +63,10 @@ class TriangulateCalculation:
         if(d1-radius_2 < error):
             goal_x = intersectionPoint1_x
             goal_y =intersectionPoint1_y
-        else if(d2-radius_2< error):
+        elif(d2-radius_2< error):
             goal_x = intersectionPoint1_x
             goal_y =intersectionPoint1_y
-        else 
+        else:
             goal_x = 0
             goal_y = 0
         return goal_x,goal_y
