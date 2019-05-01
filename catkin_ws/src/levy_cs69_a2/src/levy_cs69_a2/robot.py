@@ -42,18 +42,17 @@ class Robot:
         
         #Goal to get to
         #x,y
-        self.goal=[2]
+        self.goal=[0,0]
     
         #control booleans
         self.triangulate_control = False
         self.safety_control = False
 
-
         #triangulate distance and angles
         self.triangulate_dist = 2
-        self.triangulate_angle = 60
+        self.triangulate_angle = 2.09 
 
-##################### Current Position and Reading if arrived at Goals #######################
+##################### Callbacks  #######################
 
     def find_position(self, odometry_msg):
         pose = odometry_msg.pose.pose
@@ -73,7 +72,11 @@ class Robot:
         self.has_position = True
 
 
-################## Steering Behaviors #########################
+    def safety(self):
+        rospy.loginfo("You are in God's hands now my son.\n")
+
+
+################## Controlling Behaviors #########################
 
     #steering to goal
     def find_goal(self):
@@ -81,27 +84,37 @@ class Robot:
             find = TriangulateCalculation()
             intermediary = find.triangulate(self.strengths, self.error)
             if(intermediary[0] != 0): 
-                goal = intermediary
+                self.goal = intermediary
             else:
                 rospy.loginfo("Unable to read goal point.\n")
             
-            while self.read_goal(self.goal) != True and not rospy.is_shutdown():
-                self.cmd_msg.linear.x = 0.22
-                dist = math.sqrt((self.triangulate_point[0]- self.position[0])**2 + (self.triangulate_point[1]- self.position[1])**2 )
-                ang_divide = dist/0.22
+            theta = atan2(self.goal[1]- self.position[1], self.goal[0] -self.position[0])
+            sum_theta_x = math.cos(self.position[2]) + math.cos(theta)
+            sum_theta_y = math.sin(self.position[2]) + math.sin(theta)
+            new_theta = math.atan2(sum_theta_y, sum_theta_x) 
+            
+            if new_theta>2.84:
+                time_ang = new_theta /2.84
+            else:   
+                time_ang = 1.0
+            self.cmd_msg.angular.z = new_theta
+            time.sleep(time_ang)
+            self.cmd_msg.angular.z = 0
 
-                theta = atan2(self.goal[1]- self.position[1], self.goal[0] -self.position[0])
-                sum_theta_x = math.cos(self.position[2]) + math.cos(theta)
-                sum_theta_y = math.sin(self.position[2]) + math.sin(theta)
-                new_theta = math.atan2(sum_theta_y, sum_theta_x) 
 
-                self.cmd_msg.angular.z = new_theta / ang_divide 
+            dist = math.sqrt((self.position[0]- self.goal[0])**2 + (self.position[1] - self.goal[1])**2 )
+            time_travel=dist/0.22
+            self.cmd_msg.linear.x = 0.22
+            time.sleep(time_travel)
+            self.cmd_msg.linear.x = 0
+
+
 
     #triangulation steering    
     def start_triangulate(self):
         if self.safety_control == False:
                 
-            self.cmd_msg.angular.z = 1.0472 
+            self.cmd_msg.angular.z = self.triangulate_angle 
             time.sleep(1)
             self.cmd_msg.angular.z = 0
  
@@ -111,7 +124,7 @@ class Robot:
             self.cmd_msg.linear.x = 0
 
             try:
-                strength = self.triangulate(0,0,0)
+                strength.avg_str = self.triangulate(0,0,0)
                 rospy.loginfo(" \n****************** called service******************* \n strength is %f \n *********************", strength)
             except:
                 rospy.loginfo("Error communicating with the server \n")
@@ -120,14 +133,9 @@ class Robot:
             
 
 
-    def safety(self):
-        rospy.loginfo("You are in God's hands now my son.\n")
-
-######################### Controllers and Spin ##############################3
-
     def triangulationController(self):
         goalbool = False 
-        time_end = time.time() + 20
+        time_end = time.time() + 10
         while True and not rospy.is_shutdown():
 
             if(((time.time()-time_end)%10) < 0.4):
@@ -146,6 +154,8 @@ class Robot:
 
             time.sleep(1)
             
+####################### Spin ##############################
+
     def spin(self):
         r = rospy.Rate(self.pub_rate)
         startbool = True

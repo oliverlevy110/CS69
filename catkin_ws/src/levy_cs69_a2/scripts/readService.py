@@ -21,7 +21,6 @@ class Read:
     """
     def read_strength(self, message):
         self.current_strength = message.signal_strength
-    #    rospy.loginfo(" *************** IN READSERVICE **************\n strength = %f \n", self.current_strength)
 
     """
     Take the average wifi strength over 15 seconds
@@ -37,9 +36,10 @@ class Read:
            num_messages += 1
            total_str += self.current_strength 
            
-      #     rospy.loginfo("*************** IN READSERVICE **************\n running strength average = %f \n", total_str)
         rospy.loginfo("*************** IN READSERVICE **************\n signal average= %f \n", total_str/num_messages)
-        return total_str/num_messages
+        value = total_str/num_messages
+        return value
+
 
     def spin(self):
         rospy.spin()
@@ -48,4 +48,3 @@ if __name__ == "__main__":
     rospy.init_node("readStrength")
     read=Read()
     read.spin()
-    rospy.spin()

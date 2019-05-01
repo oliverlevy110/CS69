@@ -31,13 +31,13 @@ class TriangulateCalculation:
         d_x = x[1]-x[0]
         d_y = y[1]-y[0]
         d = math.sqrt(d_x**2 + d_y**2)
-        radius_1 = d / math.sqrt(math.abs(Plo0_1/Pl_1))
-        radius_0 = d / math.sqrt(math.abs(Plo0_1/Pl_0))
+        radius_1 = d / math.sqrt(abs(Plo0_1/Pl_1))
+        radius_0 = d / math.sqrt(abs(Plo0_1/Pl_0))
 
         d_x_2 = x[2] - x[1]
         d_y_2 = y[2] - y[1]
         d_2 = math.sqrt(d_x_2**2 + d_y_2**2)
-        radius_2 = d_2/math.sqrt(math.abs(Plo1_2/Pl_2))
+        radius_2 = d_2/math.sqrt(abs(Plo1_2/Pl_2))
 
         #distance of intersection from point 0
         a = (radius_0**2 - radius_1**2 + d**2 )/(2*d) 
