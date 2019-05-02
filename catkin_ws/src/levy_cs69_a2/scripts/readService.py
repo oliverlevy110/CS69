@@ -5,6 +5,11 @@ import rospy
 from levy_cs69_a2.msg import Signal
 from levy_cs69_a2.srv import FindSignalStrength
 
+"""
+Read the wifi signal from /turtle/signal_strength topic
+When receive a call from Robot(), average the signal strengths over 5 seconds and return the value
+
+"""
 class Read:
 
     def __init__(self):   

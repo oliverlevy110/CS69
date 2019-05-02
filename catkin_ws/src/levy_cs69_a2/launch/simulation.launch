@@ -8,7 +8,7 @@
   <node pkg="stage_ros" type="stageros" name="stageros" args="$(arg world_file)" />
 
   <include file="$(find levy_cs69_a2)/launch/levy_cs69_a2.launch">
-    <arg name="strength" default="30" />
+    <arg name="strength" default="-27" />
   </include>
 
 </launch>

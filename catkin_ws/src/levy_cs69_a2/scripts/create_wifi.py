@@ -5,25 +5,42 @@ import rospy
 from levy_cs69_a2.msg import Signal
 from nav_msgs.msg import Odometry
 from levy_cs69_a2.robot import Robot
+"""
+Class that mimics a wifi signal by publishing a strength value based on the robot's position from the "center". 
+Path loss based on Free Space Path Model.
 
+"""
 class CreateWifi:
     def __init__(self):
+
+        #Subscribers and Publishers
         self.sub_strength = rospy.Subscriber("/odom",Odometry,self.position)
         self.pub = rospy.Publisher("/turtle/signal_strength", Signal, queue_size=5) 
-        self.strength=0
+
+        #Current Strength of Signal
+        self.strength = 0
+        
+        #Center 
         self.pos = [9,9]
-             
+    
+    """
+    Continually send messages
+    """         
     def spin(self):    
         r = rospy.Rate(5)
         while not rospy.is_shutdown():
+            #Build message
             message = Signal()
             message.timestamp = rospy.get_rostime()
             message.frame_id = "2"
-#            rospy.loginfo("*****IN CREATE_WIFI*****\n signal strength = %f \n\n", self.strength)
             message.signal_strength = self.strength 
+            #Publish message
             self.pub.publish(message)
             r.sleep()
 
+    """
+    Update signal strength based on robot's position
+    """
     def position(self,odometry_msg):
         pose = odometry_msg.pose.pose
 
@@ -38,14 +55,13 @@ class CreateWifi:
         deb = 20*math.log10(0.001 * dist) + 20*math.log10(1000 * 2.4) + 32.44 
         self.strength = -deb/deb0 * 10
 
-
+"""
+Launch CreateWifi Class
+"""
 if __name__ == "__main__":
     rospy.init_node("create_wifi")
     rospy.loginfo("create NODE IS INIT \n")
     createwifi = CreateWifi()
-#    robot = Robot()
-#    robot.spin()
-#    rospy.loginfo("robot spin called \n")
     createwifi.spin()
     rospy.spin()
 
