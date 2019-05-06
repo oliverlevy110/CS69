@@ -32,12 +32,14 @@ class Read:
     """
     def processCall(self, rqst):
         #stop loop after 5 seconds
-        time_end = time.time() + 5
+        go = rospy.get_rostime()
+        stop = go + rospy.Duration(5) 
         #for averaging signal strength
         num_messages=0
         total_str=0.0
 
-        while time.time()<time_end:
+        while go<stop:
+           go = rospy.get_rostime()
            num_messages += 1
            total_str += self.current_strength 
            

@@ -34,8 +34,5 @@ if __name__ == "__main__":
     pub = rospy.Publisher("signal_strength", Signal, queue_size=5) 
     f=open("/proc/net/wireless","r")
 
-    robot = Robot()
-    robot.spin()
-
     spin(f)
 

@@ -6,24 +6,7 @@
 ### Simulation
 #### Starting the Program
 
-Go into the `levy_cs69_a2` folder. Make sure in `launch/levy_cs69_a2.launch` file looks like the following:
-
-```
-<!-- Robot nodes. -->
-<launch>
-
-  <arg name="strength" /> 
-
-  <group ns="turtle">
-    <param name="strength" value="$(arg strength)"/>
-    <!-- <node pkg="levy_cs69_a2" type="follow_wifi.py" name="follow_wifi" output="screen" />-->
-    <node pkg="levy_cs69_a2" type="readService.py" name="readService" output="screen" />
-    <node pkg="levy_cs69_a2" type="create_wifi.py" name="create_wifi" output="screen" />
-    <node pkg="levy_cs69_a2" type="start_node.py" name="start_node" output="screen"/>
-    
-  </group>
-</launch>
-```
+Go into the `levy_cs69_a2` folder. 
 
 Then run:
 
@@ -39,34 +22,19 @@ where `x` is the desired value. Stage will popup with 1 robot on a map. To close
 
 #### How it runs
 The simulation launch file will start and create the stageros node. It will then create a robot and call robot.launch.
-Robot.launch will call `start_node.py`, `create_wifi.py` and `readService.py`. The `start_node` will start robot.py, which then controls the robot's velocity in Stage. `create_wifi` controls the value of the wifi signal, and `readService.py` reads the signal produced by `create_wifi.py`
+Robot.launch will call `start_node.py`, `create_wifi.py` and `readService.py`. The `start_node` will start robot.py, which then controls the robot's velocity in Stage. `create_wifi` controls the value of the wifi signal, and `readService.py` averages the signal produced by `create_wifi.py`
 
 ### On the Robot
 
-SSH into the robot. Go into the `catkin_ws/src/levy_cs69_a2` folder. Make sure in `launch/levy_cs69_a2.launch` file looks like the following:
-
-```
-<!-- Robot nodes. -->
-<launch>
-
-  <arg name="strength" default="30" /> 
-
-  <group ns="turtle">
-    <param name="strength" value="$(arg strength)"/>
-    <node pkg="levy_cs69_a2" type="follow_wifi.py" name="follow_wifi" output="screen" />
-    <node pkg="levy_cs69_a2" type="readService.py" name="readService" output="screen" />
-    <!-- <node pkg="levy_cs69_a2" type="create_wifi.py" name="create_wifi" output="screen" />-->
-    <node pkg="levy_cs69_a2" type="start_node.py" name="start_node" output="screen"/>
-    
-  </group>
-</launch>
-```
-
+SSH into the robot. Go into the `catkin_ws/src/levy_cs69_a2` folder.
 Follow Professor Quattrini Li's instructions to bring up the robot. When ready, run:
 
 ```
-roslaunch `levy_cs69_a2` `levy_cs69_a2.launch`
+roslaunch `levy_cs69_a2` `levy_cs69_a2_robot.launch`
 ```
 
+#### How it runs
+
+The launch file will call `start_node.py`, `follow_wifi.py` and `readService.py`. The `start_node` will start robot.py, which then controls the robot's velocity in Stage. `follow_wifi` reads the value of the wifi signal, and `readService.py` averages the signal read by `follow_wifi.py`when called.
 
 

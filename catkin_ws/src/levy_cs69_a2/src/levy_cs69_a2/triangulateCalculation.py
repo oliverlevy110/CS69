@@ -78,6 +78,9 @@ class TriangulateCalculation:
         intersectionPoint2_x = x_intersect + d_y * (h/d)
         intersectionPoint2_y = y_intersect - d_x * (h/d)
         
+        rospy.loginfo("triangulation intersections \n 1: %f,%f \n 2: %f,%f", intersectionPoint1_x, intersectionPoint1_y, intersectionPoint2_x, intersectionPoint2_y )
+
+
         #Distances from each intersection point to the center of circle 2 
         intersect1dx = intersectionPoint1_x - x[2]
         intersect1dy = intersectionPoint1_y - y[2]
@@ -88,12 +91,12 @@ class TriangulateCalculation:
         d2 = math.sqrt((intersect2dx**2) + (intersect2dy**2))
 
         #checking which point lies on the circumference of circle 2. The point that does is the intersection point of the three circles.
-        if(d1-radius_2 < error):
-            goal_x = intersectionPoint1_x
-            goal_y =intersectionPoint1_y
-        elif(d2-radius_2< error):
+        if(d2-radius_2 < error):
             goal_x = intersectionPoint2_x
             goal_y =intersectionPoint2_y
+        elif(d1-radius_2< error):
+            goal_x = intersectionPoint1_x
+            goal_y =intersectionPoint1_y
         else:
             goal_x = 0
             goal_y = 0
